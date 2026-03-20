@@ -3,640 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Creative Development & Review Process — Noise Media</title>
+<title>Creative Development &amp; Review Process — Noise Media</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: #ffffff;
-    color: #1a1a2e;
-    min-height: 100vh;
-    overflow-x: hidden;
+    font-family:'Montserrat',sans-serif;
+    background:#f8f8e9;
+    color:#1a1b1f;
+    min-height:100vh;
+    padding:48px 20px 60px;
   }
 
-  /* ── HERO ── */
-  .hero {
-    text-align: center;
-    padding: 60px 24px 40px;
-    position: relative;
-    overflow: hidden;
+  .container { max-width:680px; margin:0 auto; }
+
+  .page-header {
+    text-align:center;
+    margin-bottom:48px;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -120px; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%);
-    pointer-events: none;
+  .page-header h1 {
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:-0.5px;
+    margin-bottom:8px;
+    color:#1b1b1b;
   }
-  .hero .badge {
-    display: inline-block;
-    background: rgba(255,107,53,0.08);
-    border: 1px solid rgba(255,107,53,0.2);
-    color: #c2410c;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, #1a1a2e 40%, #ff6b35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .hero p {
-    color: #666;
-    font-size: 15px;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.6;
+  .page-header .subtitle {
+    font-size:13px;
+    color:#6c6c6a;
+    font-weight:400;
   }
 
-  /* ── MAIN FLOW ── */
-  .flow {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px 40px;
-    position: relative;
-  }
-
-  /* Vertical connector line */
-  .flow::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 280px;
-    width: 2px;
-    background: linear-gradient(to bottom, #ff6b35 0%, #ff3366 60%, rgba(255,51,102,0.15) 100%);
-    transform: translateX(-50%);
-    z-index: 0;
-  }
-
-  /* ── STEP CARD ── */
   .step {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 32px;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUp 0.5s ease forwards;
-  }
-  .step:nth-child(1) { animation-delay: 0.1s; }
-  .step:nth-child(2) { animation-delay: 0.25s; }
-  .step:nth-child(3) { animation-delay: 0.4s; }
-  .step:nth-child(4) { animation-delay: 0.55s; }
-  .step:nth-child(5) { animation-delay: 0.7s; }
-  .step:nth-child(6) { animation-delay: 0.85s; }
-
-  .step-dot {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 16px;
-    margin: 0 auto 16px;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 0 6px #ffffff, 0 0 20px rgba(255,107,53,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .step:hover .step-dot {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 6px #ffffff, 0 0 30px rgba(255,107,53,0.35);
-  }
-  .step-dot.orange { background: linear-gradient(135deg, #ff6b35, #e85d2c); color: #fff; }
-  .step-dot.pink { background: linear-gradient(135deg, #ff3366, #cc2952); color: #fff; }
-  .step-dot.purple { background: linear-gradient(135deg, #8b5cf6, #6d3fe0); color: #fff; }
-  .step-dot.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); color: #fff; }
-  .step-dot.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
-  .step-dot.green { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
-
-  .step-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 28px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    cursor: default;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  .step:hover .step-card {
-    border-color: #cbd5e1;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    display:grid;
+    grid-template-columns:48px 1fr;
+    gap:0 20px;
+    margin-bottom:4px;
+    position:relative;
   }
 
-  .step-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+  .step::after {
+    content:'';
+    position:absolute;
+    left:23px;
+    top:48px;
+    bottom:-4px;
+    width:2px;
+    background:#c73c1e;
+    opacity:0.25;
   }
-  .step-icon {
-    font-size: 22px;
-    flex-shrink: 0;
+  .step:last-child::after, .step.no-line::after { display:none; }
+
+  .step-num {
+    width:48px; height:48px;
+    border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:18px; color:#fff;
+    position:relative; z-index:1;
+  }
+  .step-num.c1 { background:#c73c1e; }
+  .step-num.c2 { background:#819579; }
+  .step-num.c3 { background:#c73c1e; }
+  .step-num.c4 { background:#819579; }
+  .step-num.c5 { background:#c73c1e; }
+  .step-num.c6 { background:#819579; }
+
+  .step-content {
+    background:#ffffff;
+    border:1px solid #ddddd0;
+    border-radius:14px;
+    padding:24px;
+    margin-bottom:16px;
+  }
+
+  .step-label {
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    color:#819579;
+    margin-bottom:4px;
   }
   .step-title {
-    font-size: 17px;
-    font-weight: 700;
-  }
-  .step-subtitle {
-    font-size: 12px;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+    font-size:18px;
+    font-weight:700;
+    color:#1b1b1b;
+    margin-bottom:16px;
   }
 
-  .step-body {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .step-content ul {
+    list-style:none;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .step-content li {
+    font-size:13.5px;
+    line-height:1.55;
+    color:#43464d;
+    padding-left:16px;
+    position:relative;
+  }
+  .step-content li::before {
+    content:'';
+    position:absolute;
+    left:0; top:8px;
+    width:5px; height:5px;
+    border-radius:50%;
+    background:#c73c1e;
+  }
+  .step-content li strong { color:#1a1b1f; font-weight:600; }
+
+  .sub-list {
+    margin-top:6px;
+    padding-left:12px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .sub-list li { font-size:13px; color:#6c6c6a; padding-left:14px; }
+  .sub-list li::before { width:4px; height:4px; background:#819579; top:8px; }
+
+  .output {
+    margin-top:14px;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    background:#f5f0e0;
+    border:1px solid #ddddd0;
+    color:#43464d;
+  }
+  .output span { color:#1b1b1b; font-weight:700; }
+
+  .condition {
+    text-align:center;
+    padding:6px 0 6px;
+    position:relative;
+    margin-left:68px;
+    margin-bottom:4px;
+  }
+  .condition span {
+    background:#f8f8e9;
+    padding:4px 14px;
+    border:1px dashed #c73c1e;
+    border-radius:20px;
+    font-size:11px;
+    color:#9b9b9b;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.8px;
   }
 
-  .step-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .step-row .label {
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    flex-shrink: 0;
-    min-width: 60px;
-    text-align: center;
-    margin-top: 2px;
-  }
-  .step-row .detail {
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: #475569;
-  }
-  .step-row .detail strong { color: #1e293b; font-weight: 600; }
-
-  .output-bar {
-    margin-top: 14px;
-    padding: 10px 14px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .output-bar.orange { background: rgba(255,107,53,0.06); border: 1px solid rgba(255,107,53,0.2); color: #c2410c; }
-  .output-bar.pink { background: rgba(255,51,102,0.06); border: 1px solid rgba(255,51,102,0.2); color: #be185d; }
-  .output-bar.purple { background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.2); color: #7c3aed; }
-  .output-bar.teal { background: rgba(20,184,166,0.06); border: 1px solid rgba(20,184,166,0.2); color: #0d9488; }
-  .output-bar.blue { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); color: #2563eb; }
-  .output-bar.green { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); color: #16a34a; }
-
-  /* ── CONDITIONAL BRANCH ── */
-  .branch-label {
-    text-align: center;
-    margin: 8px 0 4px;
-    position: relative;
-    z-index: 1;
-  }
-  .branch-label span {
-    background: #ffffff;
-    padding: 4px 14px;
-    border: 1px dashed #cbd5e1;
-    border-radius: 20px;
-    font-size: 11px;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-
-  /* ── WIP OUTCOMES ── */
   .outcomes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 4px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:8px;
   }
   .outcome {
-    text-align: center;
-    padding: 12px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.4;
+    text-align:center;
+    padding:10px 6px;
+    border-radius:8px;
+    font-size:11.5px;
+    font-weight:600;
+    line-height:1.4;
   }
-  .outcome.go { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: #16a34a; }
-  .outcome.tweak { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); color: #b45309; }
-  .outcome.flag { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: #dc2626; }
-  .outcome .emoji { font-size: 20px; display: block; margin-bottom: 4px; }
+  .outcome .ico { display:block; width:18px; height:18px; margin:0 auto 3px; border-radius:50%; }
+  .go-ico { background:#16a34a; }
+  .tweak-ico { background:#f59e0b; }
+  .flag-ico { background:#ef4444; }
+  .outcome.go { background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; }
+  .outcome.tweak { background:#fffbeb; border:1px solid #fde68a; color:#92400e; }
+  .outcome.flag { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
 
-  /* ── CONNECTOR ARROW ── */
-  .connector {
-    display: flex;
-    justify-content: center;
-    margin: -6px 0;
-    position: relative;
-    z-index: 1;
-  }
-  .connector svg { filter: drop-shadow(0 0 4px rgba(255,107,53,0.3)); }
-
-  /* ── ESCALATION SECTION ── */
-  .escalation-section {
-    max-width: 720px;
-    margin: 20px auto 60px;
-    padding: 0 24px;
-  }
-  .escalation-header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-  .escalation-header h2 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 6px;
-    color: #ef4444;
-  }
-  .escalation-header p {
-    color: #64748b;
-    font-size: 13px;
+  .section-divider {
+    border:none;
+    border-top:2px solid #ddddd0;
+    margin:40px 0 32px;
   }
 
-  .escalation-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .esc-header {
+    margin-bottom:24px;
+  }
+  .esc-header h2 {
+    font-size:22px;
+    font-weight:800;
+    color:#1b1b1b;
+    margin-bottom:4px;
+  }
+  .esc-header p {
+    font-size:13px;
+    color:#6c6c6a;
   }
 
   .esc-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 24px;
-    border-left: 3px solid #ef4444;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideRight 0.4s ease forwards;
+    background:#ffffff;
+    border:1px solid #ddddd0;
+    border-radius:14px;
+    padding:24px;
+    margin-bottom:12px;
+    border-left:3px solid #c73c1e;
   }
-  .esc-card:nth-child(1) { animation-delay: 1.1s; }
-  .esc-card:nth-child(2) { animation-delay: 1.25s; border-left-color: #f59e0b; }
-  .esc-card:nth-child(3) { animation-delay: 1.4s; border-left-color: #8b5cf6; }
+  .esc-card.b { border-left-color:#c73c1e; }
+  .esc-card.c { border-left-color:#819579; }
 
   .esc-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:6px;
+    color:#1b1b1b;
   }
-  .esc-card .esc-tag {
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .esc-card .trigger {
+    font-size:13px;
+    color:#6c6c6a;
+    margin-bottom:12px;
   }
-  .esc-card:nth-child(1) .esc-tag { background: rgba(239,68,68,0.15); color: #ef4444; }
-  .esc-card:nth-child(2) .esc-tag { background: rgba(245,158,11,0.15); color: #f59e0b; }
-  .esc-card:nth-child(3) .esc-tag { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .esc-card .trigger strong { color:#1a1b1f; font-weight:600; }
 
   .esc-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
   }
   .esc-step {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: #475569;
-    line-height: 1.5;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:13px;
+    color:#43464d;
+    line-height:1.5;
   }
-  .esc-num {
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700;
-    flex-shrink: 0;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
-  }
-  .esc-step .arrow-right {
-    color: #94a3b8;
-    font-size: 11px;
+  .esc-step strong { color:#1a1b1f; font-weight:600; }
+  .esc-n {
+    width:22px; height:22px; min-width:22px;
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700;
+    background:#f1f5f9;
+    border:1px solid #ddddd0;
+    color:#6c6c6a;
   }
 
-  /* ── FOOTER ── */
+  .ensures {
+    margin-top:10px;
+    padding-left:32px;
+  }
+  .ensures li { font-size:13px; color:#6c6c6a; }
+
   .footer {
-    text-align: center;
-    padding: 40px 24px;
-    border-top: 1px solid #e2e8f0;
-    color: #94a3b8;
-    font-size: 12px;
+    text-align:center;
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid #ddddd0;
+    color:#9b9b9b;
+    font-size:11px;
+    letter-spacing:0.3px;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .outcomes { grid-template-columns: 1fr; }
-    .step-card { padding: 20px; }
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideRight {
-    to { opacity: 1; transform: translateX(0); }
+  @media(max-width:600px) {
+    .outcomes { grid-template-columns:1fr; }
+    .step { grid-template-columns:40px 1fr; gap:0 14px; }
+    .step-num { width:40px; height:40px; font-size:15px; border-radius:12px; }
+    .step::after { left:19px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══════════════ HERO ══════════════ -->
-<div class="hero">
-  <div class="badge">Internal Process</div>
-  <h1>Creative Development<br>& Review Process</h1>
-  <p>How creative and account teams work together — from brief to delivery, with clear checkpoints and escalation paths.</p>
-</div>
+<div class="container">
 
-<!-- ══════════════ MAIN FLOW ══════════════ -->
-<div class="flow">
+  <div class="page-header">
+    <h1>Creative Development &amp; Review Process</h1>
+    <div class="subtitle">Noise Media &middot; Internal Process Document</div>
+  </div>
 
-  <!-- STEP 1 -->
   <div class="step">
-    <div class="step-dot orange">1</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x1F4CB;</div>
-        <div>
-          <div class="step-subtitle">Step 1</div>
-          <div class="step-title">Briefing & Alignment</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">Lead</div>
-          <div class="detail"><strong>Account Manager</strong> leads a clear creative brief session with the creative team</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Covers</div>
-          <div class="detail">Objectives & KPIs, deliverables & formats, role of content within the wider strategy, key messaging & guardrails</div>
-        </div>
-      </div>
-      <div class="output-bar orange">&#x2192; Shared understanding of what success looks like</div>
+    <div class="step-num c1">1</div>
+    <div class="step-content">
+      <div class="step-label">Step 1</div>
+      <div class="step-title">Briefing &amp; Alignment</div>
+      <ul>
+        <li>Account Manager (AM) leads a <strong>clear creative brief session</strong> with the creative team</li>
+        <li>Brief must cover:
+          <ul class="sub-list">
+            <li>Objectives and KPIs</li>
+            <li>Deliverables and formats</li>
+            <li>Role of content within the wider strategy</li>
+            <li>Key messaging and guardrails</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="output">Output: <span>Shared understanding of what success looks like</span></div>
     </div>
   </div>
 
-  <!-- STEP 2 -->
   <div class="step">
-    <div class="step-dot pink">2</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x1F4A1;</div>
-        <div>
-          <div class="step-subtitle">Step 2</div>
-          <div class="step-title">Ideation & Direction Setting</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">Lead</div>
-          <div class="detail"><strong>Creative team</strong> runs a brainstorm session</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Attendees</div>
-          <div class="detail">AM and/or relevant strategist, paid media lead, or account team member where it makes sense</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Process</div>
-          <div class="detail">Ideas discussed, refined and challenged in the room. Narrowed down to a <strong>clear set of routes</strong> to progress.</div>
-        </div>
-      </div>
-      <div class="output-bar pink">&#x2192; Agreed creative directions to take forward</div>
+    <div class="step-num c2">2</div>
+    <div class="step-content">
+      <div class="step-label">Step 2</div>
+      <div class="step-title">Ideation &amp; Direction Setting</div>
+      <ul>
+        <li>Creative team runs a <strong>brainstorm session</strong>
+          <ul class="sub-list">
+            <li>Attendees: AM and/or relevant strategist, paid media lead, or account team member where makes sense</li>
+          </ul>
+        </li>
+        <li>Ideas are:
+          <ul class="sub-list">
+            <li>Discussed, refined and challenged in the room</li>
+            <li>Narrowed down to a <strong>clear set of routes to progress</strong></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="output">Output: <span>Agreed creative directions to take forward</span></div>
     </div>
   </div>
 
-  <!-- CONDITIONAL BRANCH -->
-  <div class="branch-label">
-    <span>If no cross-team members were present</span>
+  <div class="condition">
+    <span>If needed</span>
   </div>
 
-  <!-- STEP 3 -->
   <div class="step">
-    <div class="step-dot purple">3</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x1F91D;</div>
-        <div>
-          <div class="step-subtitle">Step 3 &middot; If Needed</div>
-          <div class="step-title">Cross-Team Validation</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">When</div>
-          <div class="detail">If no team members outside creative (account, paid, strategy) were present at ideation</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Action</div>
-          <div class="detail">A <strong>short follow-up session</strong> is held to review and align on directions</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Ensures</div>
-          <div class="detail">Ideas match the brief, channel considerations are accounted for, no misalignment later in the process</div>
-        </div>
-      </div>
-      <div class="output-bar purple">&#x2192; Final confirmed routes for development</div>
+    <div class="step-num c3">3</div>
+    <div class="step-content">
+      <div class="step-label">Step 3 &middot; If needed</div>
+      <div class="step-title">Cross-Team Validation</div>
+      <ul>
+        <li>If no team members outside of creative were present (e.g. account, paid, strategy):
+          <ul class="sub-list">
+            <li>A <strong>short follow-up session</strong> is held to review and align on directions</li>
+          </ul>
+        </li>
+        <li>Ensures:
+          <ul class="sub-list">
+            <li>Ideas match the brief</li>
+            <li>Channel considerations are accounted for</li>
+            <li>No misalignment later in the process</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="output">Output: <span>Final confirmed routes for development</span></div>
     </div>
   </div>
 
-  <!-- STEP 4 -->
   <div class="step">
-    <div class="step-dot teal">4</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x23F0;</div>
-        <div>
-          <div class="step-subtitle">Step 4</div>
-          <div class="step-title">Midway Checkpoint Setup</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">Lead</div>
-          <div class="detail"><strong>AM</strong> defines a midway review point — typically <strong>~50% of time to final delivery</strong></div>
-        </div>
-        <div class="step-row">
-          <div class="label">Purpose</div>
-          <div class="detail">Sense-check one developed direction. Avoid late-stage rework.</div>
-        </div>
-      </div>
-      <div class="output-bar teal">&#x2192; Checkpoint scheduled at the halfway mark</div>
+    <div class="step-num c4">4</div>
+    <div class="step-content">
+      <div class="step-label">Step 4</div>
+      <div class="step-title">Midway Checkpoint Setup</div>
+      <ul>
+        <li>AM defines a <strong>midway review point</strong>
+          <ul class="sub-list">
+            <li>Typically <strong>~50% of time to final delivery</strong></li>
+          </ul>
+        </li>
+        <li>Purpose:
+          <ul class="sub-list">
+            <li>Sense-check one developed direction</li>
+            <li>Avoid late-stage rework</li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <!-- STEP 5 -->
   <div class="step">
-    <div class="step-dot blue">5</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x1F528;</div>
-        <div>
-          <div class="step-subtitle">Step 5</div>
-          <div class="step-title">Creative Development (WIP Review)</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">Stage</div>
-          <div class="detail">Creative team develops work to a <strong>clear directional stage</strong> — not fully polished, but strong enough to show concept, structure and execution</div>
-        </div>
-        <div class="step-row">
-          <div class="label">Review</div>
-          <div class="detail"><strong>Creative lead</strong> (e.g. Beau) alignment, then quick review with <strong>AM / strategy / paid</strong></div>
-        </div>
-        <div class="step-row">
-          <div class="label">Outcomes</div>
-          <div class="detail">
-            <div class="outcomes">
-              <div class="outcome go"><span class="emoji">&#x2705;</span>Proceed as planned</div>
-              <div class="outcome tweak"><span class="emoji">&#x1F504;</span>Minor tweaks & continue</div>
-              <div class="outcome flag"><span class="emoji">&#x26A0;&#xFE0F;</span>Flag gaps early</div>
-            </div>
+    <div class="step-num c5">5</div>
+    <div class="step-content">
+      <div class="step-label">Step 5</div>
+      <div class="step-title">Creative Development (Work in Progress Review)</div>
+      <ul>
+        <li>Creative team develops the work to a <strong>clear directional stage</strong>:
+          <ul class="sub-list">
+            <li>Not fully polished</li>
+            <li>But strong enough to show concept, structure and execution</li>
+          </ul>
+        </li>
+        <li>Internal review includes:
+          <ul class="sub-list">
+            <li>Creative lead (e.g. Beau) alignment</li>
+            <li>Quick review with AM / strategy / paid</li>
+          </ul>
+        </li>
+        <li>Review outcome:
+          <div class="outcomes">
+            <div class="outcome go"><span class="ico go-ico"></span>Proceed as planned</div>
+            <div class="outcome tweak"><span class="ico tweak-ico"></span>Minor tweaks and continue</div>
+            <div class="outcome flag"><span class="ico flag-ico"></span>Flag gaps or misalignment early</div>
           </div>
-        </div>
-      </div>
-      <div class="output-bar blue">&#x2192; Confidence in direction before final production</div>
+        </li>
+      </ul>
+      <div class="output">Output: <span>Confidence in direction before final production</span></div>
     </div>
   </div>
 
-  <!-- STEP 6 -->
-  <div class="step">
-    <div class="step-dot green">6</div>
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-icon">&#x1F680;</div>
-        <div>
-          <div class="step-subtitle">Step 6</div>
-          <div class="step-title">Final Development & Delivery</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <div class="step-row">
-          <div class="label">Creative</div>
-          <div class="detail">Creative team completes assets following the aligned direction</div>
-        </div>
-        <div class="step-row">
-          <div class="label">AM checks</div>
-          <div class="detail">Output meets brief and is <strong>ready for client delivery</strong></div>
-        </div>
-      </div>
-      <div class="output-bar green">&#x2192; Final assets delivered to client</div>
+  <div class="step no-line">
+    <div class="step-num c6">6</div>
+    <div class="step-content">
+      <div class="step-label">Step 6</div>
+      <div class="step-title">Final Development &amp; Delivery</div>
+      <ul>
+        <li>Creative team completes assets following aligned direction</li>
+        <li>AM ensures:
+          <ul class="sub-list">
+            <li>Output meets brief</li>
+            <li>Ready for client delivery</li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 
-</div>
+  <hr class="section-divider">
 
-<!-- ══════════════ ESCALATION ══════════════ -->
-<div class="escalation-section">
-  <div class="escalation-header">
-    <h2>Discrepancy & Escalation</h2>
-    <p>What happens when things don't align — clear paths to resolution</p>
+  <div class="esc-header">
+    <h2>Discrepancy &amp; Escalation Process</h2>
   </div>
 
-  <div class="escalation-grid">
-
-    <!-- ESC A -->
-    <div class="esc-card">
-      <h3>
-        <span class="esc-tag">A</span>
-        Post-Brainstorm Misalignment
-      </h3>
-      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">If AM and creative team disagree on direction:</p>
-      <div class="esc-steps">
-        <div class="esc-step">
-          <div class="esc-num">1</div>
-          <div>Escalate to <strong style="color:#1e293b">Account Director</strong> (Sam or Matt)</div>
-        </div>
-        <div class="esc-step">
-          <div class="esc-num">2</div>
-          <div>Attempt to resolve through discussion and refinement</div>
-        </div>
-        <div class="esc-step">
-          <div class="esc-num">3</div>
-          <div>If still unresolved <span class="arrow-right">&#x2192;</span> escalate to <strong style="color:#1e293b">Executive Leadership</strong> (Ant or Joe) for final decision</div>
-        </div>
-      </div>
+  <div class="esc-card">
+    <h3>A. Post-Brainstorm Misalignment</h3>
+    <div class="trigger">If AM and creative team <strong>disagree on direction</strong>:</div>
+    <div class="esc-steps">
+      <div class="esc-step"><div class="esc-n">1</div><div>Escalate to <strong>Account Director (e.g. Sam or Matt)</strong></div></div>
+      <div class="esc-step"><div class="esc-n">2</div><div>Attempt to resolve through discussion and refinement</div></div>
+      <div class="esc-step"><div class="esc-n">3</div><div>If still unresolved &rarr; escalate to <strong>Executive Leadership (Ant or Joe)</strong> for final decision on whether to proceed with an idea</div></div>
     </div>
-
-    <!-- ESC B -->
-    <div class="esc-card">
-      <h3>
-        <span class="esc-tag">B</span>
-        Misalignment During Development
-      </h3>
-      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">If AM is not aligned on WIP creative:</p>
-      <div class="esc-steps">
-        <div class="esc-step">
-          <div class="esc-num">1</div>
-          <div>Escalate to <strong style="color:#1e293b">Account Director</strong> for review</div>
-        </div>
-        <div class="esc-step">
-          <div class="esc-num">2</div>
-          <div>Align on changes or direction</div>
-        </div>
-        <div class="esc-step">
-          <div class="esc-num">3</div>
-          <div>If still unresolved <span class="arrow-right">&#x2192;</span> escalate to <strong style="color:#1e293b">Ant or Joe</strong></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ESC C -->
-    <div class="esc-card">
-      <h3>
-        <span class="esc-tag">C</span>
-        New Ideas Introduced Mid-Process
-      </h3>
-      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">If new creative routes or ideas emerge during development:</p>
-      <div class="esc-steps">
-        <div class="esc-step">
-          <div class="esc-num">!</div>
-          <div><strong style="color:#1e293b">AM must be consulted</strong> before progressing</div>
-        </div>
-        <div class="esc-step">
-          <div class="esc-num">&#x2713;</div>
-          <div>Ensures alignment with brief and prevents scope or strategy drift</div>
-        </div>
-      </div>
-    </div>
-
   </div>
-</div>
 
-<!-- ══════════════ FOOTER ══════════════ -->
-<div class="footer">
-  Noise Media &middot; Creative Development & Review Process &middot; 2026
+  <div class="esc-card b">
+    <h3>B. Misalignment During Development</h3>
+    <div class="trigger">If AM is <strong>not aligned on WIP creative</strong>:</div>
+    <div class="esc-steps">
+      <div class="esc-step"><div class="esc-n">1</div><div>Escalate to <strong>Account Director</strong> for review</div></div>
+      <div class="esc-step"><div class="esc-n">2</div><div>Align on changes or direction</div></div>
+      <div class="esc-step"><div class="esc-n">3</div><div>If still unresolved &rarr; escalate to <strong>Ant or Joe</strong></div></div>
+    </div>
+  </div>
+
+  <div class="esc-card c">
+    <h3>C. New Ideas Introduced Mid-Process</h3>
+    <div class="trigger">If new creative routes or ideas emerge:</div>
+    <div class="esc-steps">
+      <div class="esc-step"><div class="esc-n">!</div><div><strong>AM must be consulted before progressing</strong></div></div>
+    </div>
+    <ul class="ensures">
+      <li>Ensures:</li>
+      <li>Alignment with brief</li>
+      <li>No scope or strategy drift</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Noise Media &middot; Creative Development &amp; Review Process &middot; 2026
+  </div>
+
 </div>
 
 </body>
